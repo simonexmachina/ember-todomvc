@@ -6,7 +6,8 @@
     "qunit": "~1.12.0",
     "ember": "1.1.0-beta.2",
     "ember-data-shim": "1.0.0-beta.3",
-    "ember-data": "~1.0.0-beta.3"
+    "ember-data": "~1.0.0-beta.3",
+    "twitter-bootstrap-sass": "~2.0.3"
   },
   "resolutions": {
     "ember": "1.1.0-beta.2"
