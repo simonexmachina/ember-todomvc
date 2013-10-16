@@ -1,0 +1,15 @@
+{
+  "name": "twitter-bootstrap-sass",
+  "homepage": "https://github.com/thomas-mcdonald/bootstrap-sass",
+  "version": "2.0.3",
+  "_release": "2.0.3",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.3",
+    "commit": "b65481923bccf66e5d0122f020ca50e74e36e636"
+  },
+  "_source": "git://github.com/thomas-mcdonald/bootstrap-sass.git",
+  "_target": "~2.0.3",
+  "_originalSource": "twitter-bootstrap-sass",
+  "_direct": true
+}
