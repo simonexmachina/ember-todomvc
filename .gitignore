@@ -6,7 +6,6 @@
 
 # dependencies
 /node_modules
-/vendor/*
 !/vendor/almond.js
 !/vendor/resolver.js
 
@@ -15,3 +14,5 @@
 /connect.lock
 /libpeerconnection.log
 .DS_Store
+vendor/ember-couchdb-kit/vendor
+vendor/ember-data/tmp
