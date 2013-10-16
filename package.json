@@ -46,7 +46,9 @@
     "grunt-dom-munger": "~2.0.1",
     "load-grunt-config": "~0.5.0",
     "bower": "~1.2.7",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-sass": "~0.6.1",
+    "connect-livereload": "~0.3.0"
   },
   "dependencies": {
     "loom": "~2.0.0",
