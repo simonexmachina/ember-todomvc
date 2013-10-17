@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "loom": "~2.0.0",
-    "loom-generators-ember": "0.0.1"
+    "loom-generators-ember": "0.0.1",
+    "http-proxy": "~0.10.3"
   }
 }
