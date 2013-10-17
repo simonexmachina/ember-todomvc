@@ -63,16 +63,20 @@ function buildWildcardMiddleware(options) {
 
 function reverseProxy() {
   var httpProxy = require('http-proxy'),
-      proxy = new httpProxy.RoutingProxy();
-  return function (req, res) {
+      proxy = new httpProxy.RoutingProxy(),
+      Buffer = require('buffer').Buffer;
+  return function (req, res, next) {
     if( req.url.indexOf('/v0/') === 0 ) {
-      userPass = new Buffer('30132a35-c23c-490b-a081-b9110733e993', "ascii")
-      userPass = userPass.toString("base64")
+      var userPass = new Buffer('30132a35-c23c-490b-a081-b9110733e993', "ascii");
+      userPass = userPass.toString("base64");
       req.headers.authorization = "Basic " + userPass;
       proxy.proxyRequest(req, res, {
         host: 'api.orchestrate.io',
         port: 80,
       });
+    }
+    else {
+      next();
     }
   };
 }

@@ -2,67 +2,67 @@ DS.OrchestrateIOAdapter = DS.RESTAdapter.extend(
     Ember.Evented,
 
   apiKey: null
-  baseUrl: 'http://api.orchestrate.io/v0'
+  host: 'http://api.orchestrate.io'
+  namespace: 'v0'
 
-  find: (store, type, id)->
-    url = @urlForType store, type, id
-    $.getJSON url
+  defaultSerializer: '_oio'
+
+  ##
+  # @todo sinceToken is ignored
+  findAll: (store, type, sinceToken)->
+    @findQuery store, type, '*'
   findMany: (store, type, ids)->
     if ids.length == 0 then return Ember.RSVP.resolve []
     params = new Array(ids.length)
     params.push "_id:#{id}" for id in ids
     @_query store, type, params
-  # Supports queries in the form:
-  #   {
-  #     <property to query>: <value or regex (for strings) to match>,
-  #     ...
-  #   }
-  # Every property added to the query is an "AND" query, not "OR"
-  # Example:
-  #  match records with "complete: true" and the name "foo" or "bar"
-  #    { complete: true, name: /foo|bar/ }
-  findQuery: (store, type, query, recordArray)->
+  findQuery: (store, type, query)->
     params = []
-    for property, value of query
-      if !value
-        throw 'Searching for empty properties is currently not supported'
-      else if typeof value.test == 'function'
-        throw 'Regular expressions are currently not supported '
-      else
-        params.push "#{property}:#{value}"
+    if typeof query == 'string'
+      params = [query]
+    else
+      for property, value of query
+        if !value
+          throw 'Searching for empty properties is currently not supported'
+        else if typeof value.test == 'function'
+          throw 'Regular expressions are currently not supported '
+        else
+          params.push "#{property}:#{value}"
     @_query store, type, params
-  findAll: (store, type)->
-    @_query(store, type, ['*'])
-      .then (response)->
-
-  createRecord: (store, type, record)->
-    unless id = record.get 'id'
-      record.set 'id', id = @generateIdForRecord store, type, record
-    @updateRecord store, type, record
-  updateRecord: (store, type, record)->
-    @ajax
-      url: @urlForType store, type, record.get 'id'
-      type: 'PUT'
-      data: record.toJSON includeId: true
-  deleteRecord: (store, type, record)->
-    @ajax
-      url: @urlForType store, type, record.get 'id'
-      type: 'DELETE'
-
-  urlForType: (store, type, id)->
-    url = "#{@baseUrl}/#{@collectionForType store, type}"
-    if id then url += "/#{id}"
-    url
-  collectionForType: (store, type)->
-    type.typeKey
   _query: (store, type, params)->
-    url = "#{@urlForType(store, type)}?query=#{escape params.join ' '}"
-    @ajax url: url
-  ajax: (options)->
-    $.ajax $.extend {}, options,
-      contentType: 'application/json'
-      username: @apiKey
-    
+    @ajax @buildURL(type.typeKey), 'GET', data: query: params.join ' '
+  ##
+  # Copied from RESTAdapter because we need to use "PUT" method rather than "POST"
+  createRecord: (store, type, record)->
+    data = {}
+    serializer = store.serializerFor(type.typeKey)
+    serializer.serializeIntoHash data, type, record, includeId: true
+    @ajax @buildURL(type.typeKey, record.id), "PUT", data: data
+  ajaxOptions: (url, type, options)->
+    unless options then options = {}
+    options.username = @apiKey
+    @_super url, type, options
   generateIdForRecord: (store, type, record)->
     Math.random().toString(32).substr(2, 7)
 )
+
+DS.OrchestrateIOSerializer = DS.RESTSerializer.extend
+  extractSingle: (store, primaryType, payload, recordId, requestType)->
+    results = payload
+    payloadForSuper = {}
+    payloadForSuper[primaryType.typeKey] = results.value[primaryType]
+    @_super store, primaryType, payloadForSuper, recordId, requestType
+  extractArray: (store, primaryType, payload)->
+    results = []
+    for result in payload.results
+      results.push result.value[primaryType.typeKey]
+    payloadForSuper = {}
+    payloadForSuper[primaryType.typeKey] = results
+    @_super store, primaryType, payloadForSuper
+
+Ember.onLoad 'Ember.Application', (Application)->
+  Application.initializer
+    name: "orchestrateIOAdapter"
+    initialize: (container, application)->
+      application.register 'serializer:_oio', DS.OrchestrateIOSerializer
+      application.register 'adapter:_oio', DS.OrchestrateIOAdapter
