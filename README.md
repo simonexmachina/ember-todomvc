@@ -20,7 +20,7 @@ Start the server:
 
 Open your browser at [http://localhost:8000/](http://localhost:8000).
 
-# Development
+# Ember Data
 
 Rebuilding ember-data:
 
