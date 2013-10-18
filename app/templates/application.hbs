@@ -1,3 +1,41 @@
-<h2 id='title'>Welcome to Ember.js</h2>
-
-{{outlet}}
+<header>
+  <h1>Toptal Todo App</h1>
+  {{view Ember.TextField id="new-todo" placeholder="Add an item..."
+      valueBinding="name" action="createTodo"}}
+</header>
+{{#if length}}
+  <section id="todos">
+    <ul id="todo-list" class="unstyled">
+      {{#each itemController="todo"}}
+        <li {{bindAttr class="isCompleted:completed isEditing:editing :todo-item"}}>
+          {{#if isEditing}}
+            {{view 'edit-todo' contentBinding="this"}}
+          {{else}}
+            {{view Ember.Checkbox checkedBinding="isCompleted" class="toggle"}}
+            <label {{action "editTodo" on="doubleClick"}}>{{name}}</label>
+            <button {{action "removeTodo"}} class="delete"></button>
+          {{/if}}
+          </li>
+      {{/each}}
+    </ul>
+    {{view Ember.Checkbox id="toggle-all" checkedBinding="allAreDone"}}
+  </section>
+  <footer>
+    <ul id="filters">
+      <li>
+        {{#link-to todos.index activeClass="selected"}}All{{/link-to}}
+      </li>
+      <li>
+        {{#link-to todos.active activeClass="selected"}}Active{{/link-to}}
+      </li>
+      <li>
+        {{#link-to todos.completed activeClass="selected"}}Completed{{/link-to}}
+      </li>
+    </ul>
+    {{#if anyCompleted}}
+      <button id="clear-completed" {{action "clearCompleted"}}>
+        Clear completed ({{completed}})
+      </button>
+    {{/if}}
+  </footer>
+{{/if}}
