@@ -12,7 +12,10 @@
           {{#if dueDate}}
             <span class="due-date">{{dateFormat dueDate format="llll"}}</span>
           {{/if}}
-          <button {{action "removeTodo"}} class="delete"></button>
+          <div class="right-icon">
+            <i {{bindAttr class="priorityIconClass"}}></i>
+            <button {{action "removeTodo"}} class="delete"></button>
+          </div>
         </li>
       {{/each}}
     </ul>

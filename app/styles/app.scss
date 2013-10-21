@@ -98,26 +98,36 @@ body {
     margin-right: 40px;
   }
 
-  .delete {
-    display: none;
+  .right-icon {
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 40px;
-    height: 40px;
     margin: auto 0;
-    font-size: 22px;
-    color: #a80000;
-    transition: all 0.2s;
-    border: 0;
-    background: 0;
-    &:after {
-      content: '✖';
+    i {
+      margin: 10px 13px;
+    }
+    .delete {
+      display: none;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+      color: #a80000;
+      transition: all 0.2s;
+      border: 0;
+      background: 0;
+      &:after {
+        content: '✖';
+      }
     }
   }
-  &:hover .delete {
-    display: block;
+  &:hover {
+    .delete {
+      display: block;
+    }
+    .right-icon i {
+      display: none;
+    }
   }
 
   .form-group {

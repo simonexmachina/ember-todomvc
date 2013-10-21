@@ -11,6 +11,21 @@
       <a href {{action "enterDueDate"}} class="form-control">Set due date</a>
     {{/if}}
   </div>
+  <div class="form-group">
+    <div class="left-icon"><i class="icon-star"></i></div>
+    {{#if showPriority}}
+      {{view Ember.Select
+          contentBinding="priorities"
+          optionValuePath="content.value"
+          optionLabelPath="content.label"
+          valueBinding="priority"
+          class="form-control"}}
+    {{else}}
+      <a href {{action "enterPriority"}} class="form-control">Set priority</a>
+    {{/if}}
+  </div>
+
+
   <div class="form-group pull-right">
     <button class="btn btn-primary">Save</button>
     <button class="btn btn-danger" type="button" {{action delete}}>Delete</button>
