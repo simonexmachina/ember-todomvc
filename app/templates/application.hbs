@@ -1,5 +1,5 @@
 <header>
-  <h1>Toptal Todo App</h1>
+  <h1>ToptalTodo</h1>
   {{view Ember.TextField id="new-todo" placeholder="Add an item..."
       valueBinding="name" action="createTodo"}}
 </header>
@@ -9,7 +9,7 @@
       {{#each itemController="todo"}}
         <li {{bindAttr class="isCompleted:completed isEditing:editing :todo-item"}}>
           {{#if isEditing}}
-            {{view 'edit-todo' contentBinding="this"}}
+            {{view 'edit-todo' classNames="edit" todoBinding="this"}}
           {{else}}
             {{view Ember.Checkbox checkedBinding="isCompleted" class="toggle"}}
             <label {{action "editTodo" on="doubleClick"}}>{{name}}</label>
@@ -18,23 +18,12 @@
           </li>
       {{/each}}
     </ul>
-    {{view Ember.Checkbox id="toggle-all" checkedBinding="allAreDone"}}
   </section>
   <footer>
-    <ul id="filters">
-      <li>
-        {{#link-to todos.index activeClass="selected"}}All{{/link-to}}
-      </li>
-      <li>
-        {{#link-to todos.active activeClass="selected"}}Active{{/link-to}}
-      </li>
-      <li>
-        {{#link-to todos.completed activeClass="selected"}}Completed{{/link-to}}
-      </li>
-    </ul>
     {{#if anyCompleted}}
-      <button id="clear-completed" {{action "clearCompleted"}}>
-        Clear completed ({{completed}})
+      <button id="clear-completed" class="btn"
+          {{action "clearCompleted"}}>
+        Clear completed ({{numCompleted}})
       </button>
     {{/if}}
   </footer>

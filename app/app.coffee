@@ -7,5 +7,6 @@ App = Ember.Application.create
   ready: ->
     @debug.logAll()
     @debug.globalize()
+    # @debug.logResolver()
 
 `export default App`

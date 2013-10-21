@@ -1,6 +1,6 @@
 EditTodoView = Em.TextField.extend
   className: ['edit']
-  valueBinding: 'content.title'
+  valueBinding: 'todo.title'
   didInsertElement: ->
     @$().focus()
   change: ->
@@ -12,3 +12,5 @@ EditTodoView = Em.TextField.extend
     @finishEditing()
   finishEditing: ->
     @set 'controller.isEditing', false
+
+`export default EditTodoView`

@@ -1,5 +1,5 @@
 CompletedRoute = Em.Route.extend
   model: ->
-    @store.filter 'todos', (todo)-> todo.get 'isCompleted'
+    @store.filter 'todo', (todo)-> todo.get 'isCompleted'
 
 `export default CompletedRoute`

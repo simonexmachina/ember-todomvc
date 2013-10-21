@@ -1,5 +1,5 @@
 ActiveRoute = Em.Route.extend
   model: ->
-    @store.filter 'todos', (todo)-> todo.get 'isActive'
+    @store.filter 'todo', (todo)-> todo.get 'isActive'
 
 `export default ActiveRoute`
