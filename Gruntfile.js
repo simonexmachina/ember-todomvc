@@ -142,12 +142,12 @@ module.exports = function(grunt) {
                      'build:debug', 'karma:browsers' ]);
 
   grunt.registerTask('test:server', "Start a Karma test server. Automatically reruns your tests when files change and logs the results to the terminal.", [
-                     'build:debug', 'karma:server', 'connect:server', 'watch:test']);
+                     'build:debug', 'karma:server', 'express:server', 'watch:test']);
 
   grunt.registerTask('server', "Run your server in development mode, auto-rebuilding when files change.",
-                     ['build:debug', 'connect:server', 'watch:main']);
+                     ['build:debug', 'express:server', 'watch:main']);
   grunt.registerTask('server:dist', "Build and preview production (minified) assets.",
-                     ['build:dist', 'connect:dist:keepalive']);
+                     ['build:dist', 'express:dist:keepalive']);
 
   grunt.initConfig(config);
 };

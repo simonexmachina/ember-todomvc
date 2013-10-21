@@ -1,40 +1,14 @@
 <header>
-  <h1>ToptalTodo</h1>
-  {{view Ember.TextField id="new-todo" placeholder="Add an item..."
-      valueBinding="name" action="createTodo"}}
-  <div id="auth">
-    {{#if auth.isLoggedIn}}
-      {{auth.loggedInUser.name}}
+  <h1 class="pull-left">ToptalTodo</h1>
+  <div id="auth" class="pull-right">
+    {{#if auth.user}}
+      {{auth.user.email}}
       <a href class="sign-out">[sign out]</a>
     {{else}}
-      <button type="button" class="sign-in">
+      {{#link-to 'sign-in' classNames="sign-in"}}
         <img src="/assets/plain_sign_in_blue.png">
-      </button>
+      {{/link-to}}
     {{/if}}
   </auth>
 </header>
-{{#if length}}
-  <section id="todos">
-    <ul id="todo-list" class="unstyled">
-      {{#each itemController="todo"}}
-        <li {{bindAttr class="isCompleted:completed isEditing:editing :todo-item"}}>
-          {{#if isEditing}}
-            {{view 'edit-todo' classNames="edit" todoBinding="this"}}
-          {{else}}
-            {{view Ember.Checkbox checkedBinding="isCompleted" class="toggle"}}
-            <label {{action "editTodo" on="doubleClick"}}>{{name}}</label>
-            <button {{action "removeTodo"}} class="delete"></button>
-          {{/if}}
-          </li>
-      {{/each}}
-    </ul>
-  </section>
-  <footer>
-    {{#if anyCompleted}}
-      <button id="clear-completed" class="btn"
-          {{action "clearCompleted"}}>
-        Clear completed ({{numCompleted}})
-      </button>
-    {{/if}}
-  </footer>
-{{/if}}
+{{outlet}}
