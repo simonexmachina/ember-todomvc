@@ -5,7 +5,7 @@ App = Ember.Application.create
   modulePrefix: 'appkit'
   Resolver: Resolver
   ready: ->
-    @debug.logAll()
+    # @debug.logAll()
     # @debug.logResolver()
     @debug.globalize()
 

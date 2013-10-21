@@ -1,4 +1,6 @@
-EditController = Em.ObjectController.extend
+`import ModelController from 'appkit/controllers/model'`
+
+EditController = ModelController.extend
   showDueDate: (->
     @get('content.dueDate') or @get('enteringDueDate')
   ).property('content.dueDate', 'enteringDueDate')
@@ -20,9 +22,5 @@ EditController = Em.ObjectController.extend
       todo = @get('content')
       todo.save()
       @transitionToRoute 'todo'
-    delete: ->
-      todo = @get('content')
-      todo.deleteRecord()
-      todo.save()
 
 `export default EditController`

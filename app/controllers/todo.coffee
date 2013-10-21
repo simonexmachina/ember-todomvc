@@ -1,4 +1,6 @@
-TodoController = Em.ObjectController.extend
+`import ModelController from 'appkit/controllers/model'`
+
+TodoController = ModelController.extend
   priorityIconClass: (->
     switch @get 'priorityLevel'
       when 0 then "icon-chevron-down"

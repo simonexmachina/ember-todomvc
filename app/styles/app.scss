@@ -9,9 +9,16 @@ body {
   padding: 10px;
   max-width: 600px;
 }
-#auth .signed-in {
-  line-height: 45px;
+#auth {
+  .sign-in {
+    margin-top: 10px;
+    display: block;
+  }
+  .signed-in {
+    line-height: 45px;
+  }
 }
+
 #new-todo {
   margin-top: 1em;
   padding-left: 10px;
@@ -21,7 +28,7 @@ body {
 }
 .todo {
   border-radius: 6px;
-  background: #fcfcfc;
+  background: whitesmoke;
   border: 1px solid #eee;
   margin-bottom: 5px;
   position: relative;
@@ -130,6 +137,10 @@ body {
     }
   }
 
+  &.cn {
+    margin-bottom: 10px;
+  }
+
   .form-group {
     position: relative;
     margin: 10px 8px 10px 0;
@@ -151,6 +162,10 @@ body {
   }
 }
 
+.order {
+  min-height: 0;
+  padding: 6px 10px;
+}
 .clearfix {
   @include clearfix;
 }

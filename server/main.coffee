@@ -22,7 +22,7 @@ ensureAuthenticated = (req, res, next)->
 
 app = express()
 app.use express.bodyParser()
-app.use passport.initialize()
+# app.use passport.initialize()
 app.use app.router
 app.use 
 
@@ -33,10 +33,12 @@ app.post '/auth/browserid',
     res.end JSON.stringify req.user
 
 # ensureAuthenticated, 
-app.all '/v0/*', (->
+app.all '/api/*', (->
   proxy = new httpProxy.RoutingProxy()
   userPass = new Buffer('30132a35-c23c-490b-a081-b9110733e993', "ascii").toString("base64")
   (req, res)->
+    req.url = req.url.replace(/^\/api\//, '/v0/')
+    req.headers['Content-type'] = 'application/json'
     req.headers.authorization = "Basic " + userPass
     proxy.proxyRequest req, res,
       host: 'api.orchestrate.io',
@@ -44,5 +46,3 @@ app.all '/v0/*', (->
 )()
 
 module.exports = app
-# module.exports.use = ->
-#   app.use.apply app, arguments

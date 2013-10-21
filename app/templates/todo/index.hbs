@@ -14,7 +14,7 @@
           {{/if}}
           <div class="right-icon">
             <i {{bindAttr class="priorityIconClass"}}></i>
-            <button {{action "removeTodo"}} class="delete"></button>
+            <button {{action "delete"}} class="delete"></button>
           </div>
         </li>
       {{/each}}
@@ -27,5 +27,13 @@
         {{action "clearCompleted"}}>
       Clear completed ({{numCompleted}})
     </button>
+  {{/if}}
+  {{#if length}}
+    <div class="well order pull-right">
+      Order by: 
+        <a href {{action orderBy "created"}}>created</a> |
+        <a href {{action orderBy "priority"}}>priority</a> |
+        <a href {{action orderBy "date"}}>due date</a>
+    </div>
   {{/if}}
 </footer>
