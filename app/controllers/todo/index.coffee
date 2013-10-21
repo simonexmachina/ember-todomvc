@@ -1,4 +1,6 @@
-TodoListController = Em.ArrayController.extend
+`import dateFormat from 'appkit/helpers/date-format'`
+
+TodoIndexController = Em.ArrayController.extend
   allAreDone: ((key, value)->
     if value?
       @setEach 'isCompleted', value
@@ -22,4 +24,4 @@ TodoListController = Em.ArrayController.extend
       completed.invoke 'deleteRecord'
       completed.invoke 'save'
 
-`export default TodoListController`
+`export default TodoIndexController`

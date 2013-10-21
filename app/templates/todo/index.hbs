@@ -1,0 +1,28 @@
+<section id="todos">
+  {{view Ember.TextField id="new-todo" placeholder="Add an item..."
+      valueBinding="name" action="createTodo"}}
+  {{#if length}}
+    <ul class="todo-list unstyled">
+      {{#each itemController="todo"}}
+        <li {{bindAttr class=":todo isCompleted:completed isEditing:editing"}}>
+          {{view Ember.Checkbox checkedBinding="isCompleted" class="toggle"}}
+          {{#link-to "todo.edit" this classNames="name"}}
+            {{name}}
+          {{/link-to}}
+          {{#if dueDate}}
+            <span class="due-date">{{dateFormat dueDate format="llll"}}</span>
+          {{/if}}
+          <button {{action "removeTodo"}} class="delete"></button>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</section>
+<footer>
+  {{#if anyCompleted}}
+    <button id="clear-completed" class="btn"
+        {{action "clearCompleted"}}>
+      Clear completed ({{numCompleted}})
+    </button>
+  {{/if}}
+</footer>

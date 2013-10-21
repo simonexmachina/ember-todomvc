@@ -6,7 +6,7 @@ App = Ember.Application.create
   Resolver: Resolver
   ready: ->
     @debug.logAll()
-    @debug.globalize()
     # @debug.logResolver()
+    @debug.globalize()
 
 `export default App`

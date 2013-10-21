@@ -1,0 +1,18 @@
+<form class="todo form-horizontal" role="form" {{action submit on="submit"}}>
+  <div class="form-group">
+    {{view Ember.Checkbox checkedBinding="isCompleted" classNames="toggle"}}
+    {{view view.textField classNames="form-control"}}
+  </div>
+  <div class="form-group">
+    <div class="left-icon"><i class="icon-calendar"></i></div>
+    {{#if showDueDate}}
+      {{input type="date" class="form-control" id="dueDate" valueBinding="dueDate"}}
+    {{else}}
+      <a href {{action "enterDueDate"}} class="form-control">Set due date</a>
+    {{/if}}
+  </div>
+  <div class="form-group pull-right">
+    <button class="btn btn-primary">Save</button>
+    <button class="btn btn-danger" type="button" {{action delete}}>Delete</button>
+  </div>
+</form>

@@ -1,10 +1,20 @@
 var Persona = Em.Object.extend(Em.Evented, {
-  init: function() {
-    navigator.id.watch({
-      onlogin: $.proxy(this.onLogin, this),
-      onlogout: $.proxy(this.onLogout, this)
-    });
+  bypass: function( user ) {
+    this.loggedIn(user);
+    this.watching = true;
   },
+  user: function() {
+    if( this._user ) {
+      return this._user;
+    }
+    else if( !this.watching ) {
+      navigator.id.watch({
+        onlogin: $.proxy(this.onLogin, this),
+        onlogout: $.proxy(this.onLogout, this)
+      });
+      this.watching = true;
+    }
+  }.property('_user'),
   onLogin: function(assertion) {
     var loc = document.location, self = this;
     $.ajax({
@@ -12,16 +22,22 @@ var Persona = Em.Object.extend(Em.Evented, {
       method: 'POST',
       data: {assertion: assertion}
     }).then(function(user) {
-      self.set('user', user);
-      self.trigger('signIn', user);
+      self.loggedIn(user);
     }, function() {
-      self.trigger('signOut', user);
       self.onLogout();
     });
   },
+  loggedIn: function(user) {
+    this.set('_user', user);
+    this.trigger('signIn', user);
+    var transition;
+    if( transition = this.get('afterLoginTransition') ) {
+      transition.retry();
+    }
+  },
   onLogout: function() {
-    console.log(arguments);
-    debugger;
+    this.set('_user', null);
+    this.trigger('signOut');
   }
 });
 
