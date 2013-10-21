@@ -2,6 +2,16 @@
   <h1>ToptalTodo</h1>
   {{view Ember.TextField id="new-todo" placeholder="Add an item..."
       valueBinding="name" action="createTodo"}}
+  <div id="auth">
+    {{#if auth.isLoggedIn}}
+      {{auth.loggedInUser.name}}
+      <a href class="sign-out">[sign out]</a>
+    {{else}}
+      <button type="button" class="sign-in">
+        <img src="/assets/plain_sign_in_blue.png">
+      </button>
+    {{/if}}
+  </auth>
 </header>
 {{#if length}}
   <section id="todos">
