@@ -1,3 +1,16 @@
-<h2 id='title'>Welcome to Ember.js</h2>
-
+<header class="clearfix">
+  <h1 class="pull-left">ToptalTodo</h1>
+  <div id="auth" class="pull-right">
+    {{#if auth.user}}
+      <div class="signed-in">
+        {{auth.user.email}}
+        <a href class="sign-out">[sign out]</a>
+      </div>
+    {{else}}
+      {{#link-to 'sign-in' classNames="sign-in"}}
+        <img src="/assets/plain_sign_in_blue.png">
+      {{/link-to}}
+    {{/if}}
+  </auth>
+</header>
 {{outlet}}

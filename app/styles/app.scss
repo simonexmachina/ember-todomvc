@@ -1,1 +1,175 @@
-@import url('vendor.css');
+@import 'bootstrap/mixins';
+@import 'bootstrap/variables';
+
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url('/assets/glyphicons-halflings.png');
+}
+body {
+  padding: 10px;
+  max-width: 600px;
+}
+header {
+  margin-bottom: 1em;
+}
+#auth {
+  .sign-in {
+    margin-top: 10px;
+    display: block;
+  }
+  .signed-in {
+    line-height: 45px;
+  }
+}
+
+#new-todo {
+  padding-left: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 3em;
+}
+.todo-list .todo {
+  cursor: pointer;
+}
+.todo {
+  border-radius: 6px;
+  background: whitesmoke;
+  border: 1px solid #eee;
+  margin-bottom: 5px;
+  position: relative;
+  @include clearfix;
+
+  .toggle {
+    text-align: center;
+    font-size: 27px;
+    width: 40px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    border: none; /* Mobile Safari */
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+    appearance: none;
+    box-shadow: none;
+
+    &:after {
+      content: '✔';
+      font-size: 20px;
+      color: #ccc;
+      text-shadow: 0 -1px 0 #bfbfbf;
+    }
+
+    &:checked:after {
+      color: #0088cc;
+      text-shadow: 0 1px 0 #669991;
+      bottom: 1px;
+      position: relative;
+    }
+  }
+
+  .name,
+  .due-date {
+    margin: 12px 0 9px;
+  }
+  .name {
+    margin-left: 40px;
+    word-break: break-word;
+    display: block;
+    line-height: 1.2;
+    min-height: 1em;
+    float: left;
+  }
+  .name {
+    -webkit-transition: color 0.4s;
+    -moz-transition: color 0.4s;
+    -ms-transition: color 0.4s;
+    -o-transition: color 0.4s;
+    transition: color 0.4s;
+    &,
+    &:visited {
+      color: $textColor;
+      text-decoration: none;
+    }
+  }
+
+  &.completed {
+    .name,
+    .due-date {
+      color: #a9a9a9;
+      text-decoration: line-through;
+    }
+  }
+
+  .due-date {
+    width: 170px;
+    float: right;
+    text-align: right;
+    margin-right: 40px;
+  }
+
+  .right-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto 0;
+    i {
+      margin: 10px 13px;
+    }
+    .delete {
+      display: none;
+      width: 40px;
+      height: 40px;
+      font-size: 22px;
+      color: #a80000;
+      transition: all 0.2s;
+      border: 0;
+      background: 0;
+      &:after {
+        content: '✖';
+      }
+    }
+  }
+  &:hover {
+    .delete {
+      display: block;
+    }
+    .right-icon i {
+      display: none;
+    }
+  }
+
+  &.cn {
+    margin-bottom: 10px;
+  }
+
+  .form-group {
+    position: relative;
+    margin: 10px 8px 10px 0;
+    @include clearfix;
+    .left-icon {
+      position: absolute;
+      top: 7px;
+      left: 12px;
+    }
+    .form-control {
+      margin-left: 40px;
+    }
+    a.form-control {
+      line-height: 2.4;
+    }
+    input.form-control {
+      margin-top: 2px;
+    }
+  }
+}
+
+#order-by {
+  min-height: 0;
+  padding: 6px 10px;
+}
+.clearfix {
+  @include clearfix;
+}
