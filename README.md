@@ -43,11 +43,11 @@ Returns the properties of the specified todo.
   $ curl 'http://localhost:8000/api/todos/t59epp' -X GET -u 'simon.wade@gmail.com:asdf'
   > {"todo":{"isCompleted":"true","email":"simon.wade@gmail.com","id":"t59epp"}}
 
-## `GET /api/todos/:id/set/:property/:value`
+## `GET /api/todos/:id/set/:property?value=:value`
 
 Shorthand to set a property of the specified todo.
 
-  $ curl 'http://localhost:8000/api/todos/t59epp/set/isCompleted/true' -X GET -u 'simon.wade@gmail.com:asdf'
+  $ curl 'http://localhost:8000/api/todos/t59epp/set/isCompleted?value=true' -X GET -u 'simon.wade@gmail.com:asdf'
   > {"todo":{"isCompleted":true,"email":"simon.wade@gmail.com","id":"t59epp"}}
 
 # Ember Data

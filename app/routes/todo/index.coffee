@@ -7,6 +7,9 @@ TodoIndexRoute = Em.Route.extend
       @auth.set 'afterLoginTransition', transition
       @transitionTo 'sign-in'
   model: ->
-    @store.findAll 'todo'
+    all = @store.all 'todo'
+    if all.get('length') == 0
+      all = @store.findAll 'todo'
+    all
 
 `export default TodoIndexRoute`

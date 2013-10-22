@@ -8,7 +8,8 @@ EditController = ModelController.extend
     value: value
     label: value.substring 2
   showPriority: (->
-    @get('content.priority') or @get('enteringPriority')
+    priority = @get('content.priority') 
+    (priority != '1-') or @get('enteringPriority')
   ).property('content.priority', 'enteringPriority')
   dueDateInput: (->
     console.log arguments

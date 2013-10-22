@@ -11,7 +11,9 @@ app.use express.session secret: '3908hc.ah90ash'
 app.use auth.passport.initialize()
 app.use auth.passport.session()
 app.use (req, res, next)->
-  if req.url.match /^\/api\//
+  req.user = email: 'simon.wade@gmail.com' #debug
+  if false #debug
+  # if req.url.match /^\/api\//
     auth.requireAuth req, res, next
   else
     next()
@@ -38,34 +40,36 @@ normalize = (req, data, namespace)->
     rv[namespace][name] = value
   rv
 
-app.all '/api/:collection/_create', auth.requireAuth, (req, res)->
+app.all '/api/:collection/_create', (req, res)->
   data = normalize req, _.extend({}, req.body, req.query), 'todo'
-  console.log data
   unless data.todo.id
     data.todo.id = Math.random().toString(32).substr(2, 7)
-  path = "#{req.params.collection}/#{data.todo.id}"
+  path = "/#{req.params.collection}/#{data.todo.id}"
   oio.create path, data, res
 
-app.all '/api/:collection/:id/set/:property/:value', auth.requireAuth, (req, res)->
+app.all '/api/:collection/:id/set/:property', (req, res)->
   data = {}
-  value = req.params.value
-  data[req.params.property] = value
+  data[req.params.property] = req.query.value
   data = normalize req, data, 'todo'
-  path = "#{req.params.collection}/#{req.params.id}"
-  console.log path, data
+  path = "/#{req.params.collection}/#{req.params.id}"
   oio.post path, data, res
 
-app.post '/api/*', auth.requireAuth, (req, res)->
-  path = req.url.replace(/^\/api\//, '')
-  data = normalize req, _.extend({}, req.body, req.query), 'todo'
-  oio.post path, data, res
+put = (req, res)->
+  req.url = req.url.replace(/^\/api\//, '/')
+  for prop of req.body
+    req.body[prop].email = req.user.email
+  oio.proxy req, res
+
+app.post '/api/*', put
+app.put '/api/*', put
 
 proxy = (req, res)->
-  path = req.url.replace(/^\/api\//, '')
-  oio.proxy path, req, res
+  req.url = req.url.replace(/^\/api\//, '/')
+  if req.query.query
+    req.query.query += " AND todo.email:#{req.user.email}"
+  oio.proxy req, res
 
-app.get '/api/*', auth.requireAuth, proxy
-app.put '/api/*', auth.requireAuth, proxy
-app.delete '/api/*', auth.requireAuth, proxy
+app.get '/api/*', proxy
+app.delete '/api/*', proxy
 
 module.exports = app

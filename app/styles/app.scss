@@ -27,6 +27,9 @@ header {
   box-sizing: border-box;
   min-height: 3em;
 }
+.todo-list .todo {
+  cursor: pointer;
+}
 .todo {
   border-radius: 6px;
   background: whitesmoke;
@@ -37,7 +40,7 @@ header {
 
   .toggle {
     text-align: center;
-    font-size: 24px;
+    font-size: 27px;
     width: 40px;
     height: auto;
     position: absolute;
@@ -68,7 +71,7 @@ header {
 
   .name,
   .due-date {
-    margin: 10px 0;
+    margin: 12px 0 9px;
   }
   .name {
     margin-left: 40px;
@@ -163,7 +166,7 @@ header {
   }
 }
 
-.order {
+#order-by {
   min-height: 0;
   padding: 6px 10px;
 }

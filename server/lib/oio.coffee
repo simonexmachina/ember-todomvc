@@ -3,36 +3,34 @@ http = require 'http'
 apiKey = '30132a35-c23c-490b-a081-b9110733e993'
 _ = require 'lodash'
 
-oio = (method, path, body, callback)->
+oio = (method, path, query, body, callback)->
   options =
     method: method
-    uri: "http://api.orchestrate.io/v0/" + path
+    uri: "http://api.orchestrate.io/v0" + path
+    query: query
     headers: 
       'Content-type': 'application/json'
     auth:
       user: apiKey
       pass: ''
   if method != 'GET' then options.body = JSON.stringify body
+  # console.log options #debug
   request(options, callback)
 
-proxy = (path, req, res)->
-  oio(req.method, path, req.body).pipe res
+proxy = (req, res)->
+  oio(req.method, req.url, req.query, req.body).pipe res
 
 post = (path, values, res)->
-  console.log values
-  oio 'GET', path, null, (err, getResponse, body)->
+  oio 'GET', path, null, null, (err, getResponse, body)->
     if err then return handleError getResponse
     data = _.merge JSON.parse(body), values
-    console.log body, data
-    oio 'PUT', path, data, (err, putResponse, body)->
+    oio 'PUT', path, null, data, (err, putResponse, body)->
       if err then return handleError getResponse
       oio('GET', path).pipe res
 
 create = (path, data, res)->
-  console.log path, data
-  oio 'PUT', path, data, (err, putResponse, body)->
+  oio 'PUT', path, null, data, (err, putResponse, body)->
     if err then return handleError putResponse
-    console.log putResponse.statusCode
     oio('GET', path).pipe res
 
 handleError = (oioRes)->

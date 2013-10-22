@@ -19,6 +19,8 @@
         </li>
       {{/each}}
     </ul>
+  {{else}}
+    <p>Nothing to do, great work!</p>
   {{/if}}
 </section>
 <footer>
@@ -29,7 +31,7 @@
     </button>
   {{/if}}
   {{#if length}}
-    <div class="well order pull-right">
+    <div id="order-by" class="well pull-right">
       Order by: 
         <a href {{action orderBy "created"}}>created</a> |
         <a href {{action orderBy "priority"}}>priority</a> |
