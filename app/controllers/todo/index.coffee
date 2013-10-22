@@ -1,15 +1,9 @@
 `import dateFormat from 'appkit/helpers/date-format'`
 
 TodoIndexController = Em.ArrayController.extend
+  # initially sort by priority and dateCreated
   sortProperties: ['priority', 'dateCreated']
   sortAscending: false
-  allAreDone: ((key, value)->
-    if value?
-      @setEach 'isCompleted', value
-      value
-    else
-      @get('length') > 0 and @everyProperty('isCompleted', true)
-  ).property('@each.isCompleted')
   numCompleted: (->
     @filterProperty('isCompleted', true).get('length')
   ).property '@each.isCompleted'
@@ -26,9 +20,10 @@ TodoIndexController = Em.ArrayController.extend
       completed.invoke 'deleteRecord'
       completed.invoke 'save'
     orderBy: (property)->
+      # toggle the direction if the same property is selected again
       if @get('sortProperties')?[0] == property
         @set 'sortAscending', !@get 'sortAscending'
       else
-        @set 'sortProperties', [property]
+        @set 'sortProperties', [property, 'dateCreated']
 
 `export default TodoIndexController`

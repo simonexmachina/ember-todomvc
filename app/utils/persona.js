@@ -41,7 +41,6 @@ var Persona = Em.Object.extend(Em.Evented, {
   }
 });
 
-
 Ember.onLoad('Ember.Application', function(Application) {
   return Application.initializer({
     name: "persona",

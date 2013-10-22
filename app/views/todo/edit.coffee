@@ -5,16 +5,8 @@ EditView = Em.View.extend
   textField: Em.TextField.extend
     todoBinding: 'parentView.controller.content'
     valueBinding: 'todo.name'
+    # focus the text input by default
     didInsertElement: ->
       @$().focus()
-    change: ->
-      unless @get 'value'
-        @get('controller').trigger 'removeTodo'
-    focusOut: ->
-      @set 'todo.isEditing', false
-    insertNewline: ->
-      @set 'todo.isEditing', false
-  focusOut: ->
-    @set 'controller.enteringDate', false
 
 `export default EditView`

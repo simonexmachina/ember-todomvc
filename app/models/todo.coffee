@@ -9,6 +9,7 @@ Todo = DS.Model.extend
   isActive: Em.computed.not('isCompleted')
   isEditing: false
 
+  # ensure that dateCreated is set
   adapterWillCommit: ->
     if !@get('dateCreated') and !@get('isDeleted')
       @set 'dateCreated', new Date()
@@ -17,6 +18,7 @@ Todo = DS.Model.extend
     if priority = @get 'priority'
       priority.substring 2
   ).property 'priority'
+
   priorityLevel: (->
     if priority = @get 'priority'
       +priority.substring 0, 1
