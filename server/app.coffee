@@ -68,7 +68,7 @@ app.put '/api/*', (req, res)->
 proxy = (req, res)->
   req.url = req.url.replace(/^\/api\//, '/')
   if req.query.query
-    req.query.query += " AND todo.email:#{req.user.email}"
+    req.query.query += " AND value.todo.email:\"#{req.user.email}\""
   oio.proxy req, res
 
 app.get '/api/*', proxy
