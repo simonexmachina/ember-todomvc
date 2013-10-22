@@ -1,0 +1,40 @@
+{
+  "name": "ember-orchestrate.io",
+  "version": "0.1.0",
+  "description": "An Ember Data adapter for Orchestrate.io",
+  "homepage": "https://github.com/simonwade/ember-orchestrate.io",
+  "bugs": "https://github.com/simonwade/ember-orchestrate.io/issues",
+  "author": {
+    "name": "Simon Wade",
+    "email": "simon.wade@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:simonwade/ember-orchestrate.io.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "devDependencies": {
+    "todomvc-common": "~0.1.4",
+    "jquery": "~1.9.1",
+    "handlebars": "~1.0.0-rc.3",
+    "ember": "~1.1.0-beta.4",
+    "ember-data-shim": "~1.0.0-beta.3"
+  },
+  "resolutions": {
+    "ember": "~1.1.0-beta.4"
+  },
+  "_release": "0.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.0",
+    "commit": "9819d8b14a6a93588925b1f0ee68ff9c4bda5706"
+  },
+  "_source": "git://github.com/simonwade/ember-orchestrate.io.git",
+  "_target": "~0.1.0",
+  "_originalSource": "ember-orchestrate.io",
+  "_direct": true
+}

@@ -14,7 +14,6 @@ oio = (method, path, query, body, callback)->
       user: apiKey
       pass: ''
   if method != 'GET' then options.body = JSON.stringify body
-  # console.log options #debug
   request(options, callback)
 
 proxy = (req, res)->
