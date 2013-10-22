@@ -8,7 +8,7 @@
     <div class="form-group">
       <div class="left-icon"><i class="icon-calendar"></i></div>
       {{#if showDueDate}}
-        {{input type="date" class="form-control" id="dueDate" valueBinding="dueDate"}}
+        {{view App.DateField class="form-control" id="dueDate" dateBinding="dueDate"}}
       {{else}}
         <a href {{action "enterDueDate"}} class="form-control">Set due date</a>
       {{/if}}

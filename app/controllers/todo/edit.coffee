@@ -10,6 +10,10 @@ EditController = ModelController.extend
   showPriority: (->
     @get('content.priority') or @get('enteringPriority')
   ).property('content.priority', 'enteringPriority')
+  dueDateInput: (->
+    console.log arguments
+    @get 'content.dueDate'
+  ).property 'content.dueDate'
   actions:
     enterDueDate: ->
       @set 'enteringDueDate', true

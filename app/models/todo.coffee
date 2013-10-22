@@ -3,14 +3,14 @@ Todo = DS.Model.extend
   name: DS.attr 'string'
   isCompleted: DS.attr 'boolean'
   dueDate: DS.attr 'date'
-  priority: DS.attr 'string'
+  priority: DS.attr 'string', default: '1-'
   dateCreated: DS.attr 'date'
 
   isActive: Em.computed.not('isCompleted')
   isEditing: false
 
   adapterWillCommit: ->
-    unless @get 'dateCreated'
+    if !@get('dateCreated') and !@get('isDeleted')
       @set 'dateCreated', new Date()
 
   priorityName: (->

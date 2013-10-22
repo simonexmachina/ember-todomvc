@@ -1,3 +1,5 @@
+`import DateField from 'appkit/views/date-field'`
+
 EditView = Em.View.extend
   classNames: ['edit']
   textField: Em.TextField.extend
