@@ -13,7 +13,7 @@ module.exports = {
       // page than index.html on any url not matching an asset.
       //   wildcard: 'not_index.html'
       // middleware: middleware(),
-      server: './server/main'
+      server: './server/app'
     }
   },
   dist: {
@@ -22,7 +22,7 @@ module.exports = {
       hostname: '0.0.0.0',
       bases: ['dist/'],
       // middleware: middleware(),
-      server: './server/main'
+      server: './server/app'
     }
   }
 };

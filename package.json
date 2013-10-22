@@ -57,6 +57,9 @@
     "http-proxy": "~0.10.3",
     "express": "~3.4.2",
     "passport": "~0.1.17",
-    "passport-persona": "~0.1.7"
+    "passport-persona": "~0.1.7",
+    "request": "~2.27.0",
+    "passport-http": "~0.2.2",
+    "lodash": "~2.2.1"
   }
 }
