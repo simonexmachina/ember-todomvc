@@ -172,6 +172,9 @@ header {
     position: relative;
     margin: 10px 8px 10px 0;
     @include clearfix;
+    .toggle {
+      line-height: 31px;
+    }
     .left-icon {
       position: absolute;
       top: 7px;

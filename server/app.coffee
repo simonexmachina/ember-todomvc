@@ -54,14 +54,16 @@ app.all '/api/:collection/:id/set/:property', (req, res)->
   path = "/#{req.params.collection}/#{req.params.id}"
   oio.post path, data, res
 
-put = (req, res)->
+app.post '/api/*', (req, res)->
+  path = req.url.replace(/^\/api\//, '/')
+  data = normalize req, _.extend({}, req.body, req.query), 'todo'
+  oio.post path, data, res
+
+app.put '/api/*', (req, res)->
   req.url = req.url.replace(/^\/api\//, '/')
   for prop of req.body
     req.body[prop].email = req.user.email
   oio.proxy req, res
-
-app.post '/api/*', put
-app.put '/api/*', put
 
 proxy = (req, res)->
   req.url = req.url.replace(/^\/api\//, '/')
