@@ -1,8 +1,5 @@
 var Persona = Em.Object.extend(Em.Evented, {
-  bypass: function( user ) {
-    this.loggedIn(user);
-    this.watching = true;
-  },
+  url: '/auth/browserid',
   user: function() {
     if( this._user ) {
       return this._user;
@@ -18,7 +15,8 @@ var Persona = Em.Object.extend(Em.Evented, {
   onLogin: function(assertion) {
     var loc = document.location, self = this;
     $.ajax({
-      url: '/auth/browserid', // should be https://verifier.login.persona.org/verify, but doesn't specify CORS headers
+      // should be https://verifier.login.persona.org/verify, but doesn't specify CORS headers
+      url: this.url,
       method: 'POST',
       data: {assertion: assertion}
     }).then(function(user) {
@@ -38,6 +36,10 @@ var Persona = Em.Object.extend(Em.Evented, {
   onLogout: function() {
     this.set('_user', null);
     this.trigger('signOut');
+  },
+  bypass: function( user ) {
+    this.loggedIn(user);
+    this.watching = true;
   }
 });
 
