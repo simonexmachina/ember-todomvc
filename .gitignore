@@ -5,7 +5,6 @@
 /tmp
 
 # dependencies
-/node_modules
 !/vendor/almond.js
 !/vendor/resolver.js
 

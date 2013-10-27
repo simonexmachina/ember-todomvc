@@ -13,7 +13,7 @@ module.exports = {
       // page than index.html on any url not matching an asset.
       //   wildcard: 'not_index.html'
       // middleware: middleware(),
-      server: './server/app'
+      server: './server/lib/app'
     }
   },
   dist: {

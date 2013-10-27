@@ -1,4 +1,4 @@
-app = require './app'
+app = require './lib/app'
 express = require 'express'
 
 app.use express.static './dist'
