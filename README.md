@@ -1,4 +1,7 @@
-# Toptal Todo
+# Ember TodoMVC
+
+An application that I wrote as a coding test for (Toptal)[http://toptal.com]. Also includes an example of `ember-orchestrate.io` for 
+using [Orchestrate.io](http://orchestrate.io) with Ember Data.
 
 Prerequisites:
 
