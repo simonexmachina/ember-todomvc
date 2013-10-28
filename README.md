@@ -1,7 +1,9 @@
 # Ember TodoMVC
 
-An application that I wrote as a coding test for (Toptal)[http://toptal.com]. Also includes an example of `ember-orchestrate.io` for 
-using [Orchestrate.io](http://orchestrate.io) with Ember Data.
+An application that I wrote as a coding test for [Toptal](http://toptal.com). Also includes an example of `ember-orchestrate.io` for 
+using [Orchestrate.io](http://orchestrate.io) with Ember Data, and a authentication using
+[Persona](https://developer.mozilla.org/en-US/Persona?redirectlocale=en-US&redirectslug=Persona) and 
+[Passport](http://passportjs.org/).
 
 Prerequisites:
 
